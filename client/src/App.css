@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+* { 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'VT323', monospace;
+}
+
+.page-holder {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(100deg, #0495f0, rgb(1, 77, 77));
+  background-size: 200% 200%;
+}
+
+
+/* Game Menu Styles */
+.menu {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border: 20px double #78d7f3;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 10px 11px 7px rgba(0, 0, 0, 0.6); 
+  padding: 5rem;
+}
+
+.menu-title {
+  font-size: 5rem;
+  background: linear-gradient(0deg, #78d7f3, #ffffff);
+  background-clip: text;
+  color: transparent;
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  position: relative;
+}
+
+.menu-list li {
+  font-size: 2.5rem;
+  color: #ffffff; 
+  margin: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.menu-list li:hover {
+  transform: scale(1.1);
+}
+
+/* REGISTER && LOGIN */
+
+.input-with-label {
+  display: flex;
+  margin: 0.5rem;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.menu-label {
+  margin-top: 1rem;
+  align-self: flex-start;
+  color: #ffffff; 
+  font-size: 2rem;
+}
+
+.menu-input {
+  background: none;
+  border: none;
+  border-bottom: 2px solid #78d7f3;
+  font-size: 1.5rem;
+  color: #ffffff;
+  outline: none;
+}
+
+.menu-button {
+  margin-top: 1.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  font-size: 1.5rem;
+  background-color: transparent;
+  color: #78d7f3;
+  border: 2px solid #78d7f3;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.menu-button:hover {
+  background-color: #056d8d;
+  color: #ffffff; 
+}
+
+.already-account {
+  font-size: 1.1rem;
+  margin-top: 7px;
+  color: #ffffff;
+}
+
+/* STATISTICS */
+
+.menu-other {
+  display: flex;
+  flex-direction: column;
+  height: 70%;
+  text-align: center;
+  border: 20px double #78d7f3;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 10px 11px 7px rgba(0, 0, 0, 0.6); 
+  padding: 5rem;
+  overflow-y: auto;
+}
+
+.stat-border {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 5px inset #78d7f3;
+  padding: 5px;
+  width: 100%;
+  margin-top: 1rem;
+  gap: 1rem;
+  color: #ffffff;
+  font-size: 1.6rem;
+}
