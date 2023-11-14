@@ -1,4 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 function Login() {
   return (
@@ -6,6 +10,11 @@ function Login() {
     <div className="page-holder">
 
         <form className="menu">
+
+            <div className="back-arrow-container">
+              <Link to={"/"}><FontAwesomeIcon icon={faArrowLeft} className="back-arrow" /></Link>
+            </div>
+
             <h1 className="menu-title">Login</h1>
 
             <div className="input-with-label">
@@ -19,7 +28,7 @@ function Login() {
             </div>
 
             <button className='menu-button'>Log in</button>
-            <p className='already-account'>Don't have an account? Register!</p>
+            <p className='already-account'>Don't have an account? <Link to={"/register"} className='already-account-link'>Register!</Link></p>
         </form>
 
     </div>

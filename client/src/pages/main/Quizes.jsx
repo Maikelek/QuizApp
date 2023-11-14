@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
-function Statistics() {
+function Quizes() {
   return (
 
     <div className="page-holder">
@@ -15,24 +15,21 @@ function Statistics() {
                 <Link to={"/"}><FontAwesomeIcon icon={faArrowLeft} className="back-arrow" /></Link>
             </div>
 
-            <h1 className="menu-title">Statistics</h1>
+            <h1 className="menu-title">Quizes</h1>
 
             <div className='stat-border'>
                 <span>Biology-quiz</span>
-                <span>70p</span>
-                <span>10.4.1988</span>
+                <FontAwesomeIcon icon={faPenToSquare} className='edit-button' title="Edit the quiz"/>
             </div>
 
             <div className='stat-border'>
                 <span>Networking-quiz</span>
-                <span>30p</span>
-                <span>11.7.2027</span>
+                <FontAwesomeIcon icon={faPenToSquare} className='edit-button' title="Edit the quiz"/>
             </div>
 
             <div className='stat-border'>
                 <span>Programming-quiz</span>
-                <span>11p</span>
-                <span>11.4.2001</span>
+                <FontAwesomeIcon icon={faPenToSquare} className='edit-button' title="Edit the quiz"/>
             </div>
 
         </div>
@@ -41,4 +38,4 @@ function Statistics() {
   );
 }
 
-export default Statistics;
+export default Quizes;

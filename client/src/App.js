@@ -4,6 +4,7 @@ import Index from "./pages/main/Index"
 import Register from "./pages/main/Register"
 import Login from "./pages/main/Login"
 import Statistics from "./pages/main/Statistics"
+import Quizes from "./pages/main/Quizes"
 
 import "./App.css";
 
@@ -16,6 +17,7 @@ function App() {
           <Route path="*" element={<Index/>}/>
 
           <Route path="/" element={<Index/>}/>
+          <Route path="/quizes" element={<Quizes/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/statistics" element={<Statistics/>}/>

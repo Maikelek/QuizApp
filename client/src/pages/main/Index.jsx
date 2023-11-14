@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 function Index() {
   return (
@@ -8,9 +9,9 @@ function Index() {
         <div className="menu">
             <h1 className="menu-title">Game Menu</h1>
             <ul className="menu-list">
-                <li>Choose quiz</li>
-                <li>Statistics</li>
-                <li>Log in</li>
+                <li><Link to={"/quizes"} className='menu-list-item'>Choose quiz</Link></li>
+                <li><Link to={"/statistics"} className='menu-list-item'>Statistics</Link></li>
+                <li><Link to={"/login"} className='menu-list-item'>Log in</Link></li>
             </ul>
         </div>
 
