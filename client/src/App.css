@@ -52,9 +52,15 @@
   transform: scale(1.1);
 }
 
-
 .menu-title {
   font-size: 5rem;
+  background: linear-gradient(0deg, #78d7f3, #ffffff);
+  background-clip: text;
+  color: transparent;
+}
+
+.quiz-title {
+  font-size: 2rem;
   background: linear-gradient(0deg, #78d7f3, #ffffff);
   background-clip: text;
   color: transparent;
@@ -114,10 +120,12 @@
 }
 
 .menu-button {
+  align-self: center;
   margin-top: 1.5rem;
   padding: 0.5rem 1rem;
   border: none;
   font-size: 1.5rem;
+  width: max-content;
   background-color: transparent;
   color: #78d7f3;
   border: 2px solid #78d7f3;
@@ -178,4 +186,120 @@
 
 .edit-button:hover {
   transform: scale(1.1);
+}
+
+
+/* QUIZ */
+
+.quiz-border {
+  border: 5px inset #78d7f3;
+  padding: 15px;
+  margin-top: 20px;
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+.quiz-form {
+  margin-top: 20px;
+  gap: 15px;
+}
+
+.option,
+.quiz-option-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+.quiz-option-label {
+  font-size: 1.6rem;
+  color: #ffffff;
+  cursor: pointer;
+  user-select: none;
+}
+
+.quiz-option-label:hover {
+  text-decoration: underline;
+  color: #78d7f3;
+}
+
+.quiz-option-label input[type="text"] {
+  align-self: center;
+  background: none;
+  border: none;
+  border-bottom: 2px solid #78d7f3;
+  font-size: 1.5rem;
+  color: #ffffff;
+  outline: none;
+  margin-left: 5px;
+  width: 290px;
+}
+
+.quiz-border input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 1.5rem;
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid #78d7f3;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.quiz-form,
+.option,
+.quiz-option-label {
+  margin-top: 20px;
+}
+
+.quiz-option-label {
+  font-size: 1.6rem;
+  color: #ffffff;
+  cursor: pointer;
+  user-select: none;
+}
+
+.quiz-option-label:hover {
+  text-decoration: underline;
+  color: #78d7f3;
+}
+
+.correct-answer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.correct-answer span {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.correct-answer div {
+  display: flex;
+  gap: 1rem;
+}
+
+.correct-answer label {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 1.6rem;
+  color: #ffffff;
+  cursor: pointer;
+  user-select: none;
+}
+
+.correct-answer input[type="radio"] {
+  margin-right: 5px;
 }
