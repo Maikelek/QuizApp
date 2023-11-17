@@ -14,6 +14,7 @@ CREATE TABLE `options` (
 CREATE TABLE `questions` (
   `question_id` int(11) NOT NULL,
   `quiz_id` int(11) NOT NULL,
+  `quiz_title` varchar(30) NOT NULL,
   `question_text` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -33,7 +34,7 @@ CREATE TABLE `stats` (
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `user_name` varchar(30) NOT NULL,
-  `user_email` int(60) NOT NULL,
+  `user_email` varchar(60) NOT NULL,
   `user_password` varchar(255) NOT NULL,
   `user_is_admin` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

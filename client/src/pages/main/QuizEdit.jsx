@@ -1,46 +1,66 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
+import axios from "axios";
 
+import config from '../../config/config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 function QuizEdit() {
-  return (
 
-    <div className="page-holder">
 
-        <div className="menu-other">
+    const location = useLocation();  
+    const id = location.pathname.split("/")[2]; 
+    const [questions, setQuestions] = useState ( [] );
+    const [title, setTitle] = useState ( [] );
 
-            <div className="back-arrow-container">
-                <Link to={"/quizes"}><FontAwesomeIcon icon={faArrowLeft} className="back-arrow" /></Link>
-            </div>
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                let response = await axios({
+                    method: 'post',
+                    url: `${config.apiUrl}/quiz/admin`,
+                    withCredentials: true,
+                    data: { id }
+                });
+            
+            setQuestions(response.data.questions)
+            setTitle(response.data.quizTitle.quiz_title)
+            } catch (error) {
+                console.log(error);
+            }
+        };
+      
+        fetchData();
+    }, []); 
 
-            <h1 className="menu-title">Quiz Editor</h1>
-            <h3 className="quiz-title">Programming-quiz</h3>
-            <h3 className="quiz-title">Quiz id: 1</h3>
+    return (
 
-            <div className='stat-border'>
-                <span>Python question</span>
-                <FontAwesomeIcon icon={faPenToSquare} className='edit-button' title="Edit the quiz"/>
-                <FontAwesomeIcon icon={faTrashCan} className='edit-button' title="Remove the quiz"/>
-            </div>
+        <div className="page-holder">
 
-            <div className='stat-border'>
-                <span>Javascript question</span>
-                <FontAwesomeIcon icon={faPenToSquare} className='edit-button' title="Edit the quiz"/>
-                <FontAwesomeIcon icon={faTrashCan} className='edit-button' title="Remove the quiz"/>
-            </div>
+            <div className="menu-other">
 
-            <div className='stat-border'>
-                <span>Computer vision question</span>
-                <FontAwesomeIcon icon={faPenToSquare} className='edit-button' title="Edit the quiz"/>
-                <FontAwesomeIcon icon={faTrashCan} className='edit-button' title="Remove the quiz"/>
+                <div className="back-arrow-container">
+                    <Link to={"/quizes"}><FontAwesomeIcon icon={faArrowLeft} className="back-arrow" /></Link>
+                </div>
+
+                <h1 className="menu-title">Quiz Editor</h1>
+                <h3 className="quiz-title">{title}</h3>
+                <h3 className="quiz-title">Quiz id: {id}</h3>
+
+
+                {questions.map(question => (
+                    <div key={question.question_id} className='stat-border'>
+                        <span>{question.question_title}</span>
+                        <Link to={`/quiz-edit/question/${question.question}`} style={{color: "white"}}><FontAwesomeIcon icon={faPenToSquare} className='edit-button' title="Edit the quiz"/></Link>
+                        <FontAwesomeIcon icon={faTrashCan} className='edit-button' title="Remove the quiz"/>
+                    </div>
+                ))}
+
             </div>
 
         </div>
-
-    </div>
-  );
+    );
 }
 
 export default QuizEdit;

@@ -11,7 +11,6 @@ function EditQuizQuestion() {
   const [optionC, setOptionC] = useState('');
   const [correctAnswer, setCorrectAnswer] = useState('');
 
-  // Define event handler functions
   const handleQuestionChange = (event) => setQuestion(event.target.value);
   const handleOptionAChange = (event) => setOptionA(event.target.value);
   const handleOptionBChange = (event) => setOptionB(event.target.value);
@@ -20,7 +19,7 @@ function EditQuizQuestion() {
   const handleCorrectAnswerChange = (event) => setCorrectAnswer(event.target.value);
 
   const handleSubmit = () => {
-    // Your submission logic goes here
+
   };
 
   return (
