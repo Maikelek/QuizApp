@@ -18,7 +18,7 @@ function Quizes() {
                 withCredentials: true,
                 });
             
-            setQuizes(response.data)
+            await setQuizes(response.data);
 
             } catch (error) {
                 console.log(error);
@@ -45,9 +45,11 @@ function Quizes() {
                 {quizes.map(quiz => (
                     <div key={quiz.quiz_id} className='stat-border'>
                         <span>{quiz.quiz_title}</span>
-                        <FontAwesomeIcon icon={faPlayCircle} className='edit-button' title="Play the quiz"/>
-                        <Link to={`/quiz-edit/${quiz.quiz_id}`} style={{color: "white"}}><FontAwesomeIcon icon={faPenToSquare} className='edit-button' title="Edit the quiz"/></Link>
-                        <FontAwesomeIcon icon={faTrashCan} className='edit-button' title="Remove the quiz"/>
+                        <div className='admin-buttons'>
+                            <Link to={`/quiz/${quiz.quiz_id}`} style={{color: "white"}}><FontAwesomeIcon icon={faPlayCircle} className='edit-button' title="Play the quiz"/></Link>
+                            <Link to={`/quiz-edit/${quiz.quiz_id}`} style={{color: "white"}}><FontAwesomeIcon icon={faPenToSquare} className='edit-button' title="Edit the quiz"/></Link>
+                            <FontAwesomeIcon icon={faTrashCan} className='edit-button' title="Remove the quiz"/>
+                        </div>
                     </div>
                 ))}
 

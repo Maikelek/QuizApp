@@ -303,3 +303,8 @@ input[type="radio"] {
 .correct-answer input[type="radio"] {
   margin-right: 5px;
 }
+
+.admin-buttons {
+  display: flex;
+  gap: 5px;
+}

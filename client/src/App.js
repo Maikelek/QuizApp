@@ -23,7 +23,7 @@ function App() {
           <Route path="/" element={<Index/>}/>
 
           <Route path="/quizes" element={<Quizes/>}/>
-          <Route path="/quiz" element={<Quiz/>}/>
+          <Route path="/quiz/:id" element={<Quiz/>}/>
           <Route path="/quiz-edit/:id" element={<QuizEdit/>}/>
           <Route path="/quiz-edit/question/:id" element={<EditQuizQuestion/>}/>
 

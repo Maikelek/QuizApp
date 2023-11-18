@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import axios from "axios";
 
 import config from '../../config/config';
@@ -32,7 +32,7 @@ function QuizEdit() {
         };
       
         fetchData();
-    }, []); 
+    }, [id]); 
 
     return (
 
@@ -48,12 +48,16 @@ function QuizEdit() {
                 <h3 className="quiz-title">{title}</h3>
                 <h3 className="quiz-title">Quiz id: {id}</h3>
 
+                <button className='menu-button'>Add question</button>
 
                 {questions.map(question => (
                     <div key={question.question_id} className='stat-border'>
                         <span>{question.question_title}</span>
-                        <Link to={`/quiz-edit/question/${question.question}`} style={{color: "white"}}><FontAwesomeIcon icon={faPenToSquare} className='edit-button' title="Edit the quiz"/></Link>
-                        <FontAwesomeIcon icon={faTrashCan} className='edit-button' title="Remove the quiz"/>
+                        <div className='admin-buttons'>
+                            <Link to={`/quiz-edit/question/${question.question_id}`} style={{color: "white"}}><FontAwesomeIcon icon={faPenToSquare} className='edit-button' title="Edit the quiz"/></Link>
+                            <FontAwesomeIcon icon={faTrashCan} className='edit-button' title="Remove the quiz"/>
+                        </div>
+
                     </div>
                 ))}
 
