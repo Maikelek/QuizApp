@@ -100,10 +100,51 @@ const quizData = (req, res) => {
   });
 };
 
+const removeQuiz = (req, res) => {
+  const quiz_id = req.body.id;
+  const query_options = `DELETE options FROM options
+                          JOIN questions ON options.question_id = questions.question_id
+                          WHERE questions.quiz_id = ?`;
+  const query_questions = "DELETE FROM questions WHERE quiz_id = ?";
+  const query_quizes = "DELETE FROM quizes WHERE quiz_id = ?";
+
+  db.query(query_options, [quiz_id], (err, data) => {
+    if (err) return res.send(err);
+
+    db.query(query_questions, [quiz_id], (err, data) => {
+      if (err) return res.send(err);
+    });
+
+    db.query(query_quizes, [quiz_id], (err, data) => {
+      if (err) return res.send(err);
+      return res.json("Deleted");
+    });
+
+  });
+};
+
+const removeQuestion = (req, res) => {
+  const question_id = req.body.question_id;
+  const query_question = "DELETE FROM options WHERE question_id = ?";
+  const query_option = "DELETE FROM questions WHERE question_id = ?";
+
+  db.query(query_question, [question_id], (err, data) => {
+    if (err) return res.send(err);
+
+    db.query(query_option, [question_id], (err, data) => {
+      if (err) return res.send(err);
+      return res.json("Deleted");
+    });
+  });
+  
+};
+
 
 module.exports = {
     getQuizes,
     getQuestions,
     getOptions,
-    quizData
+    quizData,
+    removeQuiz,
+    removeQuestion
 };

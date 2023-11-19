@@ -10,11 +10,12 @@ router.route("/")
 
 
 router.route("/admin")  
-    .post(quizController.getQuestions);
-
+    .post(quizController.getQuestions)
+    .delete(quizController.removeQuiz)
 
 router.route("/admin/question")  
-    .post(quizController.getOptions);
+    .post(quizController.getOptions)
+    .delete(quizController.removeQuestion)
 
 
 

@@ -4,7 +4,7 @@ import axios from "axios";
 
 import config from '../../config/config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faPenToSquare, faTrashCan, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faPenToSquare, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 
 function Quizes() {
 
@@ -48,7 +48,6 @@ function Quizes() {
                         <div className='admin-buttons'>
                             <Link to={`/quiz/${quiz.quiz_id}`} style={{color: "white"}}><FontAwesomeIcon icon={faPlayCircle} className='edit-button' title="Play the quiz"/></Link>
                             <Link to={`/quiz-edit/${quiz.quiz_id}`} style={{color: "white"}}><FontAwesomeIcon icon={faPenToSquare} className='edit-button' title="Edit the quiz"/></Link>
-                            <FontAwesomeIcon icon={faTrashCan} className='edit-button' title="Remove the quiz"/>
                         </div>
                     </div>
                 ))}
