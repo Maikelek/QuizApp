@@ -15,6 +15,7 @@ router.route("/admin")
 
 router.route("/admin/question")  
     .post(quizController.getOptions)
+    .put(quizController.updateQuestion)
     .delete(quizController.removeQuestion)
 
 

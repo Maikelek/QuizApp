@@ -140,11 +140,45 @@ const removeQuestion = (req, res) => {
 };
 
 
+const updateQuestion = (req, res) => {
+  const {
+    question,
+    optionA,
+    optionB,
+    optionC,
+    correctAnswer,
+    id
+  } = req.body.formData;
+
+  const query_update_question = "UPDATE questions SET question_text = ? WHERE question_id = ?";
+  const query_update_options = "UPDATE options SET option_a = ?, option_b = ?, option_c = ?, option_correct = ? WHERE question_id = ?";
+
+  db.query(query_update_question, [question, id], (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).send("Internal Server Error");
+    }
+
+    db.query(query_update_options, [optionA, optionB, optionC, correctAnswer, id], (err, data) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).send("Internal Server Error");
+      }
+
+      return res.json("Question and options updated successfully");
+    });
+  });
+};
+
+
+
+
 module.exports = {
     getQuizes,
     getQuestions,
     getOptions,
     quizData,
     removeQuiz,
-    removeQuestion
+    removeQuestion,
+    updateQuestion
 };
