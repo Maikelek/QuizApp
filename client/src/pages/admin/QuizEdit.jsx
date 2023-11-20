@@ -78,7 +78,7 @@ function QuizEdit() {
                 <h3 className="quiz-title">Quiz id: {id}</h3>
 
                 <div>
-                    <button className='menu-button'>Add question</button>
+                    <button className='menu-button' >Add question</button>
                     <button className='menu-button' onClick={() => handleClickQuiz()}>Remove quiz</button>
                 </div>
 
