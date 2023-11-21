@@ -11,7 +11,6 @@ import Statistics from "./pages/main/Statistics"
 import QuizEdit from "./pages/admin/QuizEdit"
 import EditQuizQuestion from "./pages/admin/EditQuizQuestion"
 
-
 import "./App.css";
 
 function App() {

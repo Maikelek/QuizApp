@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const db = require("../db"); 
+require("dotenv").config();
 
 
 const registerUser = (req, res) => {
@@ -13,7 +14,6 @@ const registerUser = (req, res) => {
         if(error) {
            return console.log(error);
         } 
-        console.log(results)
         if ( results.length > 0 ) {
             return res.status(401).json({ message: "Email is already used !" });
         }
@@ -24,12 +24,36 @@ const registerUser = (req, res) => {
             if(error) {
                 console.log(error);
             } else {
-                return res.status(200).json({ messageGreen: "You are registered." });
+                return res.status(200).json({ message: "You are registered." });
             }
         });
     });
 }
 
+
+const loginUser = (req, res) => {
+    const nickname = req.body.nickname;
+    const password = req.body.password;
+    const query = "SELECT * FROM users WHERE user_name = ?";
+
+    db.query(query, [nickname], async (error, results) => {
+        if (results.length === 0) {
+            return res.json({message: "Wrong username or password"})
+        } else {
+
+            if (await bcrypt.compare(password, results[0].user_password)) {
+                
+                return res.json({message: "Valid", token})
+            } else {
+                return res.json({message: "Wrong username or password"}) 
+            }
+        }
+    })
+
+    console.log(nickname, password)
+}
+
 module.exports = {
-    registerUser
+    registerUser,
+    loginUser
 };
