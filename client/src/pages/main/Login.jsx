@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
 import config from '../../config/config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -31,7 +32,10 @@ function Login() {
     });
     
     if (response.data.message === "Valid") {
-      console.log("logged")
+      console.log("logged");
+      localStorage.setItem("token", response.data.token);
+      console.log(localStorage.getItem("token"))
+      console.log(jwtDecode(localStorage.getItem("token")))
     } else {
       console.log("not logged")
     }

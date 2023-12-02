@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const db = require("../db"); 
+const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 
@@ -42,15 +43,13 @@ const loginUser = (req, res) => {
         } else {
 
             if (await bcrypt.compare(password, results[0].user_password)) {
-                
+                const token = jwt.sign({ userId: results[0].user_id, isAdmin: results[0].user_is_admin }, process.env.JWT_SECRET);
                 return res.json({message: "Valid", token})
             } else {
                 return res.json({message: "Wrong username or password"}) 
             }
         }
     })
-
-    console.log(nickname, password)
 }
 
 module.exports = {
