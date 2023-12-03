@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
 
 import config from '../../config/config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,6 +8,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 function Login() {
 
+  const nav = useNavigate(); 
   const [user, setUser] = useState({
     nickname: "",
     password: ""
@@ -32,10 +32,8 @@ function Login() {
     });
     
     if (response.data.message === "Valid") {
-      console.log("logged");
       localStorage.setItem("token", response.data.token);
-      console.log(localStorage.getItem("token"))
-      console.log(jwtDecode(localStorage.getItem("token")))
+      nav("/");
     } else {
       console.log("not logged")
     }

@@ -8,6 +8,13 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 function Quiz() {
 
+  const [is_logged, setLogged] = useState(false);
+  
+  useEffect( () => {
+    const token = localStorage.getItem("token");
+    setLogged(token ? true : false);
+  }, [])
+
   const location = useLocation();  
   const id = location.pathname.split("/")[2]; 
 
@@ -125,7 +132,7 @@ function Quiz() {
 
           <form className='quiz-form' onSubmit={handleSubmit}>
             <Link to={"/"}><button className='menu-button'>BACK TO MENU</button></Link>
-            <button className='menu-button'>SAVE SCORE</button>
+            {is_logged ? <button className='menu-button'>SAVE SCORE</button> : null}
           </form>
 
         </div>
