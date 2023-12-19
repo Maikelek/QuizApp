@@ -24,12 +24,12 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  border: 18px double #78d7f3;
-  padding: 18px;
-  border-radius: 18px;
+  border: 12px double #78d7f3;
+  padding: 12px;
+  border-radius: 12px;
   background-color: rgba(0, 0, 0, 0.5);
-  box-shadow: 9px 10px 7px rgba(0, 0, 0, 0.6);
-  padding: 3.5rem;
+  box-shadow: 6px 7px 5px rgba(0, 0, 0, 0.6);
+  padding: 2.5rem;
   position: relative;
 }
 
@@ -271,6 +271,15 @@ input[type="radio"] {
 .correct-answer div {
   display: flex;
   gap: 1.5rem;
+}
+
+.error {
+  color: red;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 6px;
+  background-color: #f8d7da; 
+  border-radius: 4px;
 }
 
 .correct-answer label {

@@ -16,7 +16,6 @@ function Statistics() {
             </div>
 
             <h1 className="menu-title">Statistics</h1>
-
             <div className='stat-border'>
                 <span>Biology-quiz</span>
                 <span>70p</span>

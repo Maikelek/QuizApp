@@ -2,18 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import axios from "axios";
 
+import useAuth from '../hooks/useAuth';
 import config from '../../config/config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 function Quiz() {
 
-  const [is_logged, setLogged] = useState(false);
-  
-  useEffect( () => {
-    const token = localStorage.getItem("token");
-    setLogged(token ? true : false);
-  }, [])
+  const { isLogged } = useAuth();
 
   const location = useLocation();  
   const id = location.pathname.split("/")[2]; 
@@ -132,7 +128,7 @@ function Quiz() {
 
           <form className='quiz-form' onSubmit={handleSubmit}>
             <Link to={"/"}><button className='menu-button'>BACK TO MENU</button></Link>
-            {is_logged ? <button className='menu-button'>SAVE SCORE</button> : null}
+            {isLogged ? <button className='menu-button'>SAVE SCORE</button> : null}
           </form>
 
         </div>

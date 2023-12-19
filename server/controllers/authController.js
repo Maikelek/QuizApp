@@ -43,7 +43,7 @@ const loginUser = (req, res) => {
         } else {
 
             if (await bcrypt.compare(password, results[0].user_password)) {
-                const token = jwt.sign({ userId: results[0].user_id, isAdmin: results[0].user_is_admin }, process.env.JWT_SECRET);
+                const token = jwt.sign({ userId: results[0].user_id, isAdmin: results[0].user_is_admin }, process.env.JWT_SECRET, { expiresIn: '1d' });
                 return res.json({message: "Valid", token})
             } else {
                 return res.json({message: "Wrong username or password"}) 
