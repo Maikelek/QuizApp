@@ -170,15 +170,57 @@ const updateQuestion = (req, res) => {
   });
 };
 
+const saveUserStatistics = (req, res) => {
+  const { id, userId, correct, question_num } = req.body;
 
+  const query = "INSERT INTO stats (user_id, quiz_id, stat_correct_answers, stat_num_answers) VALUES (?, ?, ?, ?)";
+
+  db.query(query, [userId, id, correct, question_num ], (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).send("Internal Server Error");
+    }
+
+    return res.json("User statistics saved successfully");
+  });
+};
+
+const getStatistics = (req, res) => {
+  const userId = req.body.userId;
+
+  const query = `
+    SELECT 
+      s.*,
+      u.user_name,
+      qz.quiz_title
+    FROM 
+      stats s
+    JOIN 
+      users u ON s.user_id = u.user_id
+    JOIN 
+      quizes qz ON s.quiz_id = qz.quiz_id
+    WHERE 
+      s.user_id = ?
+  `;
+
+  db.query(query, [userId], (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("Internal Server Error");
+    }
+    return res.send(data);
+  });
+};
 
 
 module.exports = {
-    getQuizes,
-    getQuestions,
-    getOptions,
-    quizData,
-    removeQuiz,
-    removeQuestion,
-    updateQuestion
+  getQuizes,
+  getQuestions,
+  getOptions,
+  quizData,
+  removeQuiz,
+  removeQuestion,
+  updateQuestion,
+  saveUserStatistics,
+  getStatistics
 };

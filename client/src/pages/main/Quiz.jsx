@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 import useAuth from '../hooks/useAuth';
 import config from '../../config/config';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 function Quiz() {
 
-  const { isLogged } = useAuth();
-
+  const { userId } = useAuth();
+  const nav = useNavigate();
   const location = useLocation();  
   const id = location.pathname.split("/")[2]; 
 
   const [quizData, setQuizData] = useState({ quizTitle: "", questions: [] });
-  const [title, setTitle] = useState("");
   const [userAnswer, setUserAnswer] = useState(0);
 
   const [counter, setCounter] = useState(0);
@@ -42,6 +42,25 @@ function Quiz() {
 
   };
 
+  const saveScore = async () => {
+    try {
+      await axios.post(
+        `${config.apiUrl}/quiz/user`,
+        { id, userId, correct, question_num },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      nav("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -53,7 +72,6 @@ function Quiz() {
         });
 
         setQuizData(response.data);
-        setTitle(response.data.quizTitle);
       } catch (error) {
         console.log(error);
       }
@@ -72,7 +90,7 @@ function Quiz() {
           </div>
 
           <h1 className="menu-title">Quiz</h1>
-          <h3 className="quiz-title">{title}</h3>
+          <h3 className="quiz-title">{quizData.quizTitle}</h3>
           <h3 className="quiz-title">Question n: {counter + 1} / {question_num}</h3>
           <h3 className="quiz-title">Correct: {correct} / {question_num}</h3>
 
@@ -116,7 +134,7 @@ function Quiz() {
           </div>
 
           <h1 className="menu-title">END OF THE QUIZ</h1>
-          <h3 className="quiz-title">{title}</h3>
+          <h3 className="quiz-title">{quizData.quizTitle}</h3>
           <h3 className="quiz-title">Question n: {counter + 1} / {question_num}</h3>
           <h3 className="quiz-title">Correct: {correct} / {question_num}</h3>
 
@@ -128,7 +146,7 @@ function Quiz() {
 
           <form className='quiz-form' onSubmit={handleSubmit}>
             <Link to={"/"}><button className='menu-button'>BACK TO MENU</button></Link>
-            {isLogged ? <button className='menu-button'>SAVE SCORE</button> : null}
+            {userId ? <button className='menu-button' onClick={saveScore}>SAVE SCORE</button> : null}
           </form>
 
         </div>

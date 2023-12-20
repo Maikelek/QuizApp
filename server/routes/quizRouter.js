@@ -8,8 +8,13 @@ router.route("/")
     .get(quizController.getQuizes)
     .post(quizController.quizData)
 
+router.route("/user")  
+    .post(quizController.saveUserStatistics)
 
-router.route("/admin")  
+router.route("/user/statistics")  
+    .post(quizController.getStatistics) 
+
+router.route("/admin")
     .post(quizController.getQuestions)
     .delete(quizController.removeQuiz)
 

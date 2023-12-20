@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+import useAuth from '../hooks/useAuth';
 import config from '../../config/config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 function Register() {
+    const { login } = useAuth();
     const nav = useNavigate();
     const [user, setUser] = useState({
         nickname: '',
@@ -15,7 +17,7 @@ function Register() {
         password_repeat: '',
     });
     const [errors, setErrors] = useState({});
-
+    const [message, setMessage] = useState('');
     const handleChange = (e) => {
         setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
@@ -31,6 +33,10 @@ function Register() {
             validationErrors.email = 'Email is required';
         } else if (!/\S+@\S+\.\S+/.test(user.email)) {
             validationErrors.email = 'Invalid email format';
+        } else if (user.email.length > 50) {
+            validationErrors.email = 'Email is too long';
+        } else if (message) {
+            validationErrors.email = 'Email is already taken'
         }
         if (!user.password) {
             validationErrors.password = 'Password is required';
@@ -54,10 +60,11 @@ function Register() {
                 },
             });
 
-            if (response.data) {
-                console.log('a');
+            if (response.data.message === 'Valid') {
+                login(response.data.token); 
+                nav('/');
             } else {
-                console.log('b');
+                setMessage('Email is already taken');
             }
         } catch (err) {
             console.error(err);

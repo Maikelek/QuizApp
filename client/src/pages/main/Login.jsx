@@ -18,7 +18,6 @@ function Login() {
 
   const handleChange = (e) => {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    console.log(user);
   };
 
   const handleSubmit = async (e) => {

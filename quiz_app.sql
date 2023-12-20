@@ -1,7 +1,3 @@
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
 CREATE TABLE `options` (
   `option_id` int(11) NOT NULL,
   `question_id` int(11) NOT NULL,
@@ -14,7 +10,7 @@ CREATE TABLE `options` (
 CREATE TABLE `questions` (
   `question_id` int(11) NOT NULL,
   `quiz_id` int(11) NOT NULL,
-  `quiz_title` varchar(30) NOT NULL,
+  `question_title` varchar(30) NOT NULL,
   `question_text` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -28,6 +24,7 @@ CREATE TABLE `stats` (
   `user_id` int(11) NOT NULL,
   `quiz_id` int(11) NOT NULL,
   `stat_correct_answers` int(11) NOT NULL,
+  `stat_num_answers` int(11) NOT NULL,
   `stat_time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -68,4 +65,3 @@ ALTER TABLE `stats`
 
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
