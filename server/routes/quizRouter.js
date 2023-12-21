@@ -18,6 +18,16 @@ router.route("/admin")
     .post(quizController.getQuestions)
     .delete(quizController.removeQuiz)
 
+router.route("/admin/quiz")
+    .post(quizController.addQuiz)
+
+router.route("/admin/addQuestion")
+    .post(quizController.addQuestion)
+
+router.route("/admin/optionEdit")
+    .post(quizController.addOption)
+    .put(quizController.updateOption)
+
 router.route("/admin/question")  
     .post(quizController.getOptions)
     .put(quizController.updateQuestion)

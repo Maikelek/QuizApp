@@ -84,11 +84,11 @@ function Register() {
                 <h1 className="menu-title">Register</h1>
 
                 <div className="input-with-label">
-                    <label className="menu-label">Nickname</label>
                     <input
                         className="menu-input"
                         type="text"
                         name="nickname"
+                        placeholder="Nickname"
                         onChange={handleChange}
                         autoComplete="off"
                     />
@@ -96,11 +96,11 @@ function Register() {
                 </div>
 
                 <div className="input-with-label">
-                    <label className="menu-label">E-mail</label>
                     <input
                         className="menu-input"
                         type="text"
                         name="email"
+                        placeholder="E-mail"
                         onChange={handleChange}
                         autoComplete="off"
                     />
@@ -108,11 +108,11 @@ function Register() {
                 </div>
 
                 <div className="input-with-label">
-                    <label className="menu-label">Password</label>
                     <input
                         className="menu-input"
                         type="password"
                         name="password"
+                        placeholder="Password"
                         onChange={handleChange}
                         autoComplete="off"
                     />
@@ -120,11 +120,11 @@ function Register() {
                 </div>
 
                 <div className="input-with-label">
-                    <label className="menu-label">Repeat Password</label>
                     <input
                         className="menu-input"
                         type="password"
                         name="password_repeat"
+                        placeholder="Repeat Password"
                         onChange={handleChange}
                         autoComplete="off"
                     />

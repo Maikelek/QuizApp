@@ -58,21 +58,21 @@ function Login() {
         <h1 className="menu-title">Login</h1>
 
         <div className="input-with-label">
-          <label className="menu-label">Nickname</label>
           <input
             className="menu-input"
             type="text"
             name="nickname"
+            placeholder="Nickname"
             onChange={handleChange}
           />
         </div>
 
         <div className="input-with-label">
-          <label className="menu-label">Password</label>
           <input
             className="menu-input"
             type="password"
             name="password"
+            placeholder="Password"
             onChange={handleChange}
           />
         </div>

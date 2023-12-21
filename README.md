@@ -54,6 +54,8 @@ HOST = localhost
 DEV = root
 PASSWORD = 
 DATABASE = quiz_app
+
+JWT_SECRET = e90fc1788a12042982ff8dc16bcd529034fcac14880a0e2586443b4d67792a60be1a69e00b6275e1216ceb16f64ed78b34685ec36891a32cbb0062acdaf042e1
 ```
 
 ## Run the application
@@ -71,6 +73,20 @@ cd client
 npm start
 ```
 - Frontend should now be running at http://localhost:3000 
+
+# Project preview
+
+## Main page
+<img src="visuals_for_github/main.png">
+
+## Quiz page
+<img src="visuals_for_github/question.png">
+
+## Phone main page
+<img src="visuals_for_github/phone.png">
+
+## Phone quiz page
+<img src="visuals_for_github/phone-quiz.png">
 
 # Technologies used
  * **Frontend:**

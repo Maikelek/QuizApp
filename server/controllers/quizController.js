@@ -100,6 +100,17 @@ const quizData = (req, res) => {
   });
 };
 
+const addQuiz = (req, res) => {
+  const quiz_title = req.body.quiz_title;
+  const query = "INSERT INTO quizes (quiz_title) VALUES (?)";
+
+  db.query(query, [quiz_title], (err, data) => {
+    if (err) return res.send(err);
+    return res.json("Added");
+  });
+};
+
+
 const removeQuiz = (req, res) => {
   const quiz_id = req.body.id;
   const query_options = `DELETE options FROM options
@@ -120,6 +131,61 @@ const removeQuiz = (req, res) => {
       return res.json("Deleted");
     });
 
+  });
+};
+
+const addQuestion = (req, res) => {
+  const question_title = req.body.question_title;
+  const quiz_id = req.body.quiz_id;
+  const query = "INSERT INTO questions (quiz_id, question_title) VALUES (?, ?)";
+
+  db.query(query, [quiz_id, question_title], (err, data) => {
+    if (err) return res.send(err);
+    return res.json("Added");
+  });
+};
+
+const addOption = (req, res) => {
+  const { question, optionA, optionB, optionC, correctAnswer, id } = req.body.formData;
+  const queryOption = "INSERT INTO options (option_id, question_id, option_a, option_b, option_c, option_correct) VALUES (0, ?, ?, ?, ?, ?)";
+  const queryQuestion = "UPDATE questions SET question_text = ? WHERE question_id = ?";
+
+  db.query(queryOption, [id, optionA, optionB, optionC, correctAnswer], (err, data) => {
+    if (err) {
+      console.error("Error adding option:", err);
+      return res.json({ error: "Internal Server Error" });
+    }
+
+    db.query(queryQuestion, [question, id], (err, data) => {
+      if (err) {
+        console.error("Error updating question:", err);
+        return res.json({ error: "Internal Server Error" });
+      }
+
+      return res.json("Added");
+    });
+  });
+};
+
+const updateOption = (req, res) => {
+  const { question, optionA, optionB, optionC, correctAnswer, id } = req.body.formData;
+  const queryOption = "UPDATE options SET option_a = ?, option_b = ?, option_c = ?, option_correct = ? WHERE question_id = ?";
+  const queryQuestion = "UPDATE questions SET question_text = ? WHERE question_id = ?";
+
+  db.query(queryOption, [optionA, optionB, optionC, correctAnswer, id], (err, data) => {
+    if (err) {
+      console.error("Error updating option:", err);
+      return res.json({ error: "Internal Server Error" });
+    }
+
+    db.query(queryQuestion, [question, id], (err, data) => {
+      if (err) {
+        console.error("Error updating question:", err);
+        return res.json({ error: "Internal Server Error" });
+      }
+
+      return res.json("Updated");
+    });
   });
 };
 
@@ -156,13 +222,13 @@ const updateQuestion = (req, res) => {
   db.query(query_update_question, [question, id], (err, data) => {
     if (err) {
       console.log(err);
-      return res.status(500).send("Internal Server Error");
+      return res.send("Internal Server Error");
     }
 
     db.query(query_update_options, [optionA, optionB, optionC, correctAnswer, id], (err, data) => {
       if (err) {
         console.log(err);
-        return res.status(500).send("Internal Server Error");
+        return res.send("Internal Server Error");
       }
 
       return res.json("Question and options updated successfully");
@@ -178,7 +244,7 @@ const saveUserStatistics = (req, res) => {
   db.query(query, [userId, id, correct, question_num ], (err, data) => {
     if (err) {
       console.log(err);
-      return res.status(500).send("Internal Server Error");
+      return res.send("Internal Server Error");
     }
 
     return res.json("User statistics saved successfully");
@@ -206,7 +272,7 @@ const getStatistics = (req, res) => {
   db.query(query, [userId], (err, data) => {
     if (err) {
       console.error(err);
-      return res.status(500).send("Internal Server Error");
+      return res.send("Internal Server Error");
     }
     return res.send(data);
   });
@@ -218,7 +284,11 @@ module.exports = {
   getQuestions,
   getOptions,
   quizData,
+  addQuiz,
   removeQuiz,
+  addQuestion,
+  addOption,
+  updateOption,
   removeQuestion,
   updateQuestion,
   saveUserStatistics,
