@@ -16,19 +16,17 @@ function Quizes() {
 
   const handleAdding = () => {
     setIsAdding(!isAdding);
-    setQuizTitleError(''); // Reset the error when toggling the add mode
+    setQuizTitleError('');
   };
 
   const handleInputChange = (e) => {
     const { value } = e.target;
     setQuizTitle(value);
-    // Validate the input and set the error message
     setQuizTitleError(value.trim() === '' ? 'Title cannot be empty' : '');
   };
 
   const handleAdd = async () => {
     try {
-      // Check if the title is not empty before making the API call
       if (quizTitle.trim() === '') {
         setQuizTitleError('Title cannot be empty');
         return;

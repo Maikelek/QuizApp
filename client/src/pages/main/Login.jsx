@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -9,7 +9,12 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 function Login() {
   const nav = useNavigate();
-  const { login } = useAuth();
+  const { login, userId } = useAuth();
+  useEffect(() => {
+      if (userId) {
+          nav('/');
+      }
+  }, [userId, nav]);
   const [user, setUser] = useState({
     nickname: '',
     password: '',

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+import useAuth from '../hooks/useAuth';
 import config from '../../config/config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +10,12 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 function EditQuizQuestion() {
   const location = useLocation();
   const nav = useNavigate();
+  const { isAdmin } = useAuth();
+  useEffect(() => {
+      if (!isAdmin) {
+          nav('/');
+      }
+  }, [isAdmin, nav]);
   const questionId = location.pathname.split("/")[3];
   const [isUpdate, setIsUpdate] = useState(false);
   const [quizData, setQuizData] = useState({ title: '', quizId: '' });
