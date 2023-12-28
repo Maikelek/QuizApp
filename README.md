@@ -1,6 +1,6 @@
 # Quiz Application Readme
 
-Welcome to the Quiz Application! This application allows users to participate in quizzes, both with and without registration. Registered users can track their quiz history and statistics, while an administrator manages quizzes.
+Welcome to the Quiz Application! This application allows users to participate in quizzes, both with and without registration. Registered users can track their quiz statistics, while an administrator manages quizzes.
 
 ## Features
 
@@ -8,7 +8,7 @@ Welcome to the Quiz Application! This application allows users to participate in
 
 1. **Quiz Participation:**
    - Users can take quizzes without the need for registration.
-   - Registered users can log in to track their quiz progress and history.
+   - Registered users can log in to track their quiz progress.
 
 2. **Quiz Statistics:**
    - Registered users have access to their quiz statistics, showcasing performance and progress.
@@ -33,7 +33,7 @@ Welcome to the Quiz Application! This application allows users to participate in
 Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/quiz-application.git
+git clone https://github.com/Maikelek/QuizApp
 ```
 Install Dependencies for client:
 ```bash
