@@ -2,17 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import useAuth from '../hooks/useAuth';
+import { useUser } from '../../context/UserContext';
 import config from '../../config/config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faPenToSquare, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 
 function Quizes() {
-  const { isAdmin } = useAuth();
   const [isAdding, setIsAdding] = useState(false);
+  const { user } = useUser();
   const [quizTitle, setQuizTitle] = useState('');
   const [quizTitleError, setQuizTitleError] = useState('');
   const [quizes, setQuizes] = useState([]);
+
 
   const handleAdding = () => {
     setIsAdding(!isAdding);
@@ -62,7 +63,7 @@ function Quizes() {
           <Link to={"/"}><FontAwesomeIcon icon={faArrowLeft} className="back-arrow" /></Link>
         </div>
         <h1 className="menu-title">Quizes</h1>
-        {isAdmin ? <button onClick={handleAdding} className='menu-button'>{!isAdding ? "Add quiz" : "Stop adding"}</button> : null }
+        {user?.isAdmin ? <button onClick={handleAdding} className='menu-button'>{!isAdding ? "Add quiz" : "Stop adding"}</button> : null }
         {isAdding ? 
           <div className="option">
             <label htmlFor="quiz" className="quiz-option-label">
@@ -83,7 +84,7 @@ function Quizes() {
             <span>{quiz.quiz_title}</span>
             <div className='admin-buttons'>
               <Link to={`/quiz/${quiz.quiz_id}`} style={{color: "white"}}><FontAwesomeIcon icon={faPlayCircle} className='edit-button' title="Play the quiz"/></Link>
-              {isAdmin ? 
+              {user?.isAdmin ? 
                 <Link to={`/quiz-edit/${quiz.quiz_id}`} style={{color: "white"}}>
                   <FontAwesomeIcon icon={faPenToSquare} className='edit-button' title="Edit the quiz"/>
                 </Link>

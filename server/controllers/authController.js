@@ -1,6 +1,5 @@
 const bcrypt = require("bcryptjs");
-const db = require("../db"); 
-const jwt = require("jsonwebtoken");
+const db = require("../db");
 require("dotenv").config();
 
 
@@ -15,7 +14,13 @@ const registerUser = (req, res) => {
             return console.log(error);
         }
 
-        const maxUserId = result[0].maxUserId || 0;
+        if (!name || !email || !password || !password_repeat) {
+            return res.json({ message: "Please fill all fields!" });
+        }
+
+        if (password !== password_repeat) {
+            return res.json({ message: "Passwords do not match!" });
+        }
 
         db.query('SELECT user_email FROM users WHERE user_email = ?', [email], async (error, results) => {
             if (error) {
@@ -30,15 +35,13 @@ const registerUser = (req, res) => {
             db.query('INSERT INTO users (`user_name`, `user_email`, `user_password`, `user_is_admin`) VALUES (?, ?, ?, 0)', [name, email, hashed_password], (error, results) => {
                 if (error) {
                     console.log(error);
-                } else {
-                    const token = jwt.sign({ userId: maxUserId+1, isAdmin: 0 }, process.env.JWT_SECRET);
-                    return res.json({message: "Valid", token})
+                } else {            
+                    return res.json({ message: "ok"});
                 }
             });
         });
     });
 };
-
 
 
 const loginUser = (req, res) => {
@@ -52,8 +55,9 @@ const loginUser = (req, res) => {
         } else {
 
             if (await bcrypt.compare(password, results[0].user_password)) {
-                const token = jwt.sign({ userId: results[0].user_id, isAdmin: results[0].user_is_admin }, process.env.JWT_SECRET);
-                return res.json({message: "Valid", token})
+                user = {id: results[0].user_id, name:results[0].user_name, email: results[0].user_email, isAdmin: results[0].user_is_admin}
+                req.session.user = user;
+                return res.json({ message: "ok", user: user });
             } else {
                 return res.json({message: "Wrong username or password"}) 
             }
@@ -61,7 +65,31 @@ const loginUser = (req, res) => {
     })
 }
 
+const sessionExists = (req, res) => {
+    if ( req.session.user) {
+        res.send({ auth: true, user: req.session.user});
+    } else {
+        res.send({ auth: false, user:{user_is_admin: null}});
+    }
+};
+
+const deleteSession = (req, res) => {
+    if ( req.session.user ) {
+        req.session.destroy(err => {
+            if (err) {
+                res.send({logout: false, message: "Problem with logging out"})
+            } else {
+                res.send({logout: true}) 
+            }
+        })
+    } else {
+          res.send({logout: false, message: "Session does not exist"})
+        }
+}
+
 module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    sessionExists,
+    deleteSession
 };

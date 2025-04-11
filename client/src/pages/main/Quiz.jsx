@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import useAuth from '../hooks/useAuth';
 import config from '../../config/config';
-
+import { useUser } from '../../context/UserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 function Quiz() {
-  const { userId } = useAuth();
   const nav = useNavigate();
   const location = useLocation();
   const id = location.pathname.split('/')[2];
+  const { user } = useUser();
+  const userId = user?.id;
 
   const [quizData, setQuizData] = useState({ quizTitle: '', questions: [] });
   const [userAnswer, setUserAnswer] = useState(0);
@@ -23,7 +23,7 @@ function Quiz() {
   const [loading, setLoading] = useState(true); 
 
   const question_num = quizData.questions.length;
-
+  console.log(userId, user)
   const handleOptionChange = (e) => {
     const answer = e.target.value;
     setUserAnswer(answer);

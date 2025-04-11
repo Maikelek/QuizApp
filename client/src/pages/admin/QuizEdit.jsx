@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 
-import useAuth from '../hooks/useAuth';
 import config from '../../config/config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
@@ -11,12 +10,7 @@ function QuizEdit() {
     const location = useLocation();
     const id = location.pathname.split("/")[2];
     const nav = useNavigate();
-    const { isAdmin } = useAuth();
-    useEffect(() => {
-        if (!isAdmin) {
-            nav('/');
-        }
-    }, [isAdmin, nav]);
+   
     const [questions, setQuestions] = useState([]);
     const [title, setTitle] = useState([]);
     const [isAdding, setIsAdding] = useState(false);

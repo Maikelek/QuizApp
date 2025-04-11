@@ -1,26 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-
+import { useUser } from '../../context/UserContext';
 import config from '../../config/config';
-import useAuth from '../hooks/useAuth';
 
 function Statistics() {
-    const { userId: authUserId } = useAuth();
-    const nav = useNavigate();
-    const [userId, setUserId] = useState(authUserId);
     const [statistics, setStatistics] = useState([]);
+    const { user } = useUser();
+    const userId = user?.id;
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        setUserId(authUserId);
-        if (authUserId <= 0) {
-            nav('/');
-        }
-    }, [authUserId, nav]);
 
     useEffect(() => {
         const fetchUserQuizStatistics = async () => {

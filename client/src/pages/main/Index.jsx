@@ -1,12 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
+import axios from 'axios';
+import config from '../../config/config';
+import { useUser } from '../../context/UserContext';
 
 function Index() {
-  const { isLogged, logout } = useAuth();
+  const { user, setUser } = useUser();
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout  = async e => {   
+    e.preventDefault();
+    try {
+      const response = await axios.delete(`${config.apiUrl}/auth/session`, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        withCredentials: true
+      });
+      console.log(response.data);
+      if (response.data.logout === true) {
+        setUser(null);
+      }
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
   };
 
   return (
@@ -19,7 +36,7 @@ function Index() {
               Choose quiz
             </Link>
           </li>
-          {isLogged && (
+          {user && (
             <li>
               <Link to="/statistics" className="menu-list-item">
                 Statistics
@@ -28,11 +45,11 @@ function Index() {
           )}
           <li>
             <Link
-              to={isLogged ? '/' : '/login'}
-              onClick={isLogged ? handleLogout : null}
+              to={user ? '/' : '/login'}
+              onClick={user ? handleLogout : null}
               className="menu-list-item"
             >
-              {isLogged ? 'Log out' : 'Log in'}
+              {user ? 'Log out' : 'Log in'}
             </Link>
           </li>
         </ul>

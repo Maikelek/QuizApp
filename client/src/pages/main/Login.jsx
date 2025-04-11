@@ -1,25 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
-import useAuth from '../hooks/useAuth';
+import { useUser } from '../../context/UserContext';
 import config from '../../config/config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 function Login() {
   const nav = useNavigate();
-  const { login, userId } = useAuth();
-  useEffect(() => {
-      if (userId) {
-          nav('/');
-      }
-  }, [userId, nav]);
-  const [user, setUser] = useState({
-    nickname: '',
-    password: '',
-  });
   const [error, setError] = useState('');
+  const { user, setUser } = useUser();
 
   const handleChange = (e) => {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -38,10 +28,11 @@ function Login() {
         headers: {
           'Content-Type': 'application/json',
         },
+        withCredentials: true,
       });
-  
-      if (response.data.message === 'Valid') {
-        login(response.data.token); 
+      console.log(response.data);
+      if (response.data.message === 'ok') {
+        setUser(response.data.user);
         nav('/');
       } else {
         setError('Wrong username or password');

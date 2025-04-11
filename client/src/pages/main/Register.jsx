@@ -1,20 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import useAuth from '../hooks/useAuth';
 import config from '../../config/config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 function Register() {
-    const { login, userId } = useAuth();
     const nav = useNavigate();
-    useEffect(() => {
-        if (userId) {
-            nav('/');
-        }
-    }, [userId, nav]);
     const [user, setUser] = useState({
         nickname: '',
         email: '',
@@ -65,8 +58,7 @@ function Register() {
                 },
             });
 
-            if (response.data.message === 'Valid') {
-                login(response.data.token); 
+            if (response.data.message === 'ok') {
                 nav('/');
             } else {
                 setMessage('Email is already taken');
