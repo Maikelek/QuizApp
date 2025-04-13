@@ -9,6 +9,7 @@ import Login from './pages/main/Login';
 import Statistics from './pages/main/Statistics';
 import QuizEdit from './pages/admin/QuizEdit';
 import EditQuizQuestion from './pages/admin/EditQuizQuestion';
+import NotFouind from './pages/components/NotFound';
 
 import './App.css';
 import ProtectedRoute from './hooks/ProtectedRoute';
@@ -18,7 +19,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="*" element={<Index />} />
+          <Route path="*" element={<NotFouind />} />
 
           <Route path="/" element={<Index />} />
           <Route path="/quizes" element={<Quizes />} />

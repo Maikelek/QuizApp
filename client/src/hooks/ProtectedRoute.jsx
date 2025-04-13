@@ -1,10 +1,11 @@
 import { Navigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
+import Loading from "../pages/components/Loading";
 
 const ProtectedRoute = ({ children, adminOnly = false }) => {
     const { user, loading } = useUser();
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <Loading />;
 
     if (!user) {
         return <Navigate to="/" replace />;

@@ -2,7 +2,6 @@ const bcrypt = require("bcryptjs");
 const db = require("../db");
 require("dotenv").config();
 
-
 const registerUser = (req, res) => {
     const name = req.body.nickname;
     const email = req.body.email;

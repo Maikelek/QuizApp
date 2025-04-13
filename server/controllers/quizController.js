@@ -1,6 +1,5 @@
 const db = require("../db"); 
 
-
 const getQuizes = (req, res) => {   
     const q = "SELECT * from quizes";
   
@@ -9,7 +8,6 @@ const getQuizes = (req, res) => {
         return res.send(data);
     })
 };
-
 
 const getQuestions = (req, res) => {
     const id = req.body.id;
@@ -50,7 +48,6 @@ const getOptions = (req, res) => {
         return res.send(data)
     })
 };
-
 
 const quizData = (req, res) => {
   const id = req.body.id;
@@ -109,7 +106,6 @@ const addQuiz = (req, res) => {
     return res.json("Added");
   });
 };
-
 
 const removeQuiz = (req, res) => {
   const quiz_id = req.body.id;
@@ -204,7 +200,6 @@ const removeQuestion = (req, res) => {
   });
   
 };
-
 
 const updateQuestion = (req, res) => {
   const {
